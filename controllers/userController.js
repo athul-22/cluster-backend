@@ -241,8 +241,6 @@ export const getUser = async (req, res, next) => {
 
 
 
-
-
 export const updateUser = async (req, res, next) => {
   try {
     const { firstName, lastName, location, profileUrl, profession } = req.body;
