@@ -80,35 +80,22 @@ cloudinary.config({
 
 export const createPost = async (req, res, next) => {
   try {
-    console.log(req.body);  // Log the entire request body to see what is received
+    console.log(req.body);
 
     const { userId, description, image } = req.body;
-    console.log(userId);
-    console.log(description);
 
     if (!userId || !description) {
-      return res.status(400).json({ success: false, message: 'UserId and description are required - Server error' });
-    }
-
-    let imageUrl = null;
-
-    // Check if file exists in the request
-    if (req.file) {
-      // Upload the file to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: 'cluster', // Set your desired folder name in Cloudinary
-        quality: 'auto',
+      return res.status(400).json({
+        success: false,
+        message: 'UserId and description are required - Server error',
       });
-
-      // Get the URL from the Cloudinary response
-      imageUrl = result.secure_url;
     }
 
-    // Create a new post with the Cloudinary image URL
+    // Create a new post with the provided image URL
     const post = await Posts.create({
       userId,
       description,
-      image: imageUrl,
+      image,
     });
 
     res.status(201).json({
