@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
+
 //schema
 const userSchema = new mongoose.Schema(
   {
@@ -28,7 +29,9 @@ const userSchema = new mongoose.Schema(
     friends: [{ type: Schema.Types.ObjectId, ref: "Users" }],
     views: [{ type: String }],
     verified: { type: Boolean, default: true },
-  },
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: "Users" }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Users" }] 
+    },
   { timestamps: true }
 );
 
