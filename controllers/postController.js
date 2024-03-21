@@ -110,11 +110,32 @@ export const createPost = async (req, res, next) => {
 };
 
 
+// export const getPost = async (req, res) => {
+//   try {
+//     // Get posts from the database
+//     const { userId } = req.body;
+//     const posts = await Posts.find().populate('userId', 'firstName lastName profileUrl tick');
+
+//     // Send the posts as a response
+//     res.status(200).json({
+//       success: true,
+//       message: 'Posts retrieved successfully',
+//       data: posts,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ success: false, message: 'Internal Server Error' });
+//   }
+// };
+
 export const getPost = async (req, res) => {
   try {
     // Get posts from the database
     const { userId } = req.body;
-    const posts = await Posts.find().populate('userId', 'firstName lastName profileUrl');
+    const posts = await Posts.find().populate({
+      path: 'userId',
+      select: 'firstName lastName profileUrl tick' // Include tick attribute
+    });
 
     // Send the posts as a response
     res.status(200).json({
@@ -127,7 +148,6 @@ export const getPost = async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
-
 
 
 // export const getPost = async (req, res, next) => {

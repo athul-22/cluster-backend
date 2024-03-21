@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema(
     profession: { type: String },
     friends: [{ type: Schema.Types.ObjectId, ref: "Users" }],
     views: [{ type: String }],
+    tick: { type: Boolean, default: false },
     verified: { type: Boolean, default: true },
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: "Users" }],
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Users" }] 

@@ -9,6 +9,7 @@ import dbConnection from "./dbConfig/index.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import router from "./routes/index.js";
 import { configureCloudinaryRoutes } from "./controllers/imageUploadController.js";
+import User from './models/userModel.js';
 
 const __dirname = path.resolve(path.dirname(""));
 
@@ -35,6 +36,14 @@ configureCloudinaryRoutes(app);
 
 // Error middleware
 app.use(errorMiddleware);
+
+// const usersToUpdate = await User.find({ tick: { $exists: false } });
+
+// // Update each document to include the tick field
+// await Promise.all(usersToUpdate.map(async (user) => {
+//   user.tick = false; // Set the default value for tick
+//   await user.save();
+// }));
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);

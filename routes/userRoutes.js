@@ -17,6 +17,8 @@ import {
 } from "../controllers/userController.js";
 import {checkFollowing,followUser,unfollowUser} from "../controllers/connection.controller.js";
 import userAuth from "../middleware/authMiddleware.js";
+import likePost from "../controllers/postLikes.controller.js";
+import tickUser from '../controllers/tick.controller.js';
 
 const router = express.Router();
 const __dirname = path.resolve(path.dirname(""));
@@ -122,6 +124,11 @@ router.get('/followers/:userId', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+router.post('/like', likePost);
+
+router.put('/tick/:userId',tickUser)
 
 
 export default router;
